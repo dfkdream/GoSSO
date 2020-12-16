@@ -1,0 +1,2 @@
+# GoSSO
+Lightweight SSO Service
