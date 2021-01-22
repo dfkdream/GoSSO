@@ -1,0 +1,19 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "GoSSO Web Interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfkdream/GoSSO.git"
+  },
+  "author": "dfkdream",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfkdream/GoSSO/issues"
+  },
+  "homepage": "https://github.com/dfkdream/GoSSO#readme"
+}
