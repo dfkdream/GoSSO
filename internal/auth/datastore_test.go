@@ -218,3 +218,44 @@ func TestDataStore_DeleteUser(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestDataStore_Size(t *testing.T) {
+	ds := createTempDS()
+
+	if s := ds.Size(); s != 0 {
+		t.Errorf("Expected Size()==0 but got %d", s)
+	}
+
+	p, err := permission.FromString("+:sso")
+	if err != nil {
+		t.Error(err)
+	}
+
+	u1 := &User{
+		ID:          uuid.New(),
+		Username:    "hello",
+		Password:    mustHashPassword("world"),
+		Permissions: []permission.Permission{p},
+	}
+
+	err = ds.AddUser(u1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if s := ds.Size(); s != 1 {
+		t.Errorf("Expected Size()==1 but got %d", s)
+	}
+
+	u1.ID = uuid.New()
+	u1.Username = "hola"
+
+	err = ds.AddUser(u1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if s := ds.Size(); s != 2 {
+		t.Errorf("Expected Size()==2 but got %d", s)
+	}
+}

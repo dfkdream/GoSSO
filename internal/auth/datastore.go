@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"log"
+
 	"github.com/asdine/storm/v3"
 	"github.com/asdine/storm/v3/codec/gob"
 	"github.com/google/uuid"
@@ -19,6 +21,15 @@ func NewDataStore(path string) (*DataStore, error) {
 	return &DataStore{
 		db: db,
 	}, nil
+}
+
+func (d DataStore) Size() int {
+	s, err := d.db.Count(&User{})
+	if err != nil {
+		log.Println(err)
+		return -1
+	}
+	return s
 }
 
 func (d DataStore) AddUser(user *User) error {
