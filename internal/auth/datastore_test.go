@@ -9,7 +9,6 @@ import (
 
 	"github.com/asdine/storm/v3"
 
-	"github.com/dfkdream/GoSSO/internal/auth/secondfactor"
 	"github.com/dfkdream/permission"
 
 	"github.com/google/uuid"
@@ -53,11 +52,10 @@ func TestDataStore_AddUser(t *testing.T) {
 	}
 
 	u1 := &User{
-		ID:            uuid.New(),
-		Username:      "hello",
-		Password:      mustHashPassword("world"),
-		SecondFactors: []secondfactor.SecondFactor{},
-		Permissions:   []permission.Permission{p},
+		ID:          uuid.New(),
+		Username:    "hello",
+		Password:    mustHashPassword("world"),
+		Permissions: []permission.Permission{p},
 	}
 
 	err = ds.AddUser(u1)
@@ -88,11 +86,10 @@ func TestDataStore_GetUserByID(t *testing.T) {
 	}
 
 	u1 := &User{
-		ID:            uuid.New(),
-		Username:      "hello",
-		Password:      mustHashPassword("world"),
-		SecondFactors: make([]secondfactor.SecondFactor, 0),
-		Permissions:   []permission.Permission{p},
+		ID:          uuid.New(),
+		Username:    "hello",
+		Password:    mustHashPassword("world"),
+		Permissions: []permission.Permission{p},
 	}
 
 	err = ds.AddUser(u1)
@@ -124,11 +121,10 @@ func TestDataStore_GetUserByUsername(t *testing.T) {
 	}
 
 	u1 := &User{
-		ID:            uuid.New(),
-		Username:      "hello",
-		Password:      mustHashPassword("world"),
-		SecondFactors: []secondfactor.SecondFactor{},
-		Permissions:   []permission.Permission{p},
+		ID:          uuid.New(),
+		Username:    "hello",
+		Password:    mustHashPassword("world"),
+		Permissions: []permission.Permission{p},
 	}
 
 	err = ds.AddUser(u1)
@@ -160,11 +156,10 @@ func TestDataStore_UpdateUser(t *testing.T) {
 	}
 
 	u1 := &User{
-		ID:            uuid.New(),
-		Username:      "hello",
-		Password:      mustHashPassword("world"),
-		SecondFactors: []secondfactor.SecondFactor{},
-		Permissions:   []permission.Permission{p},
+		ID:          uuid.New(),
+		Username:    "hello",
+		Password:    mustHashPassword("world"),
+		Permissions: []permission.Permission{p},
 	}
 
 	err = ds.AddUser(u1)
@@ -202,11 +197,10 @@ func TestDataStore_DeleteUser(t *testing.T) {
 	}
 
 	u1 := &User{
-		ID:            uuid.New(),
-		Username:      "hello",
-		Password:      mustHashPassword("world"),
-		SecondFactors: []secondfactor.SecondFactor{},
-		Permissions:   []permission.Permission{p},
+		ID:          uuid.New(),
+		Username:    "hello",
+		Password:    mustHashPassword("world"),
+		Permissions: []permission.Permission{p},
 	}
 
 	err = ds.AddUser(u1)
