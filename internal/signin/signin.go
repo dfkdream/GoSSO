@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/dfkdream/GoSSO/internal/must"
+
 	"github.com/google/uuid"
 
 	"github.com/dgrijalva/jwt-go"
@@ -17,17 +19,11 @@ import (
 )
 
 var refreshTokenPermissions = []permission.Permission{
-	{
-		Allow:      true,
-		Namespaces: []string{"gosso", "token", "refresh"},
-	},
+	must.PermissionFromString("+:gosso:token:refresh"),
 }
 
 var defaultPermissions = []permission.Permission{
-	{
-		Allow:      true,
-		Namespaces: []string{"gosso"},
-	},
+	must.PermissionFromString("+:gosso"),
 }
 
 type Handler struct {
