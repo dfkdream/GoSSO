@@ -125,11 +125,12 @@ func (h Handler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 func (h Handler) refreshToken(u *auth.User) (string, error) {
 	payload := u
 	payload.Permissions = refreshTokenPermissions
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, jwt.MapClaims{
-		"iss": "gosso",
-		"nbf": time.Now().Unix(),
-		"exp": time.Now().Add(h.refreshTokenTimeout).Unix(),
-		"usr": payload,
+	token := jwt.NewWithClaims(jwt.SigningMethodES256, auth.UserClaim{
+		Issuer:    "gosso",
+		IssuedAt:  time.Now().Unix(),
+		NotBefore: time.Now().Unix(),
+		ExpiresAt: time.Now().Add(h.refreshTokenTimeout).Unix(),
+		User:      *payload,
 	})
 	return token.SignedString(h.pk)
 }
