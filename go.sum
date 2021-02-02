@@ -12,6 +12,8 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dfkdream/permission v0.0.1 h1:J2r3Fk9+frpfBPnJFnfhW/Ph6UzzyWM3nfDaqrQMj8E=
 github.com/dfkdream/permission v0.0.1/go.mod h1:MEpv1CCxxlAxGq2d6TNvoVwEK52+m12AX9fSKs9eQ0Y=
+github.com/dfkdream/permission v0.0.2 h1:2wFORWK1tD2PW5tooRybC66ZUJ7jWJg5N0zePXMQWL8=
+github.com/dfkdream/permission v0.0.2/go.mod h1:MEpv1CCxxlAxGq2d6TNvoVwEK52+m12AX9fSKs9eQ0Y=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/duo-labs/webauthn v0.0.0-20200714211715-1daaee874e43 h1:eEEfwrmEwl0LVuWz/VkAefdgtPbX174Huu5dxxceihI=
