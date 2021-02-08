@@ -43,7 +43,8 @@ func TestToken_WebService(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	h := signin.New(ds, pk, 1*time.Second)
+	h := restful.NewContainer()
+	h.Add(signin.New(ds, pk, 1*time.Second).WebService())
 	tk, err := New(ds, pk, 1*time.Second)
 	if err != nil {
 		t.Error(err)
@@ -71,7 +72,7 @@ func TestToken_WebService(t *testing.T) {
 		data.Set("username", "hello")
 		data.Add("password", "world")
 
-		req := httptest.NewRequest("POST", "/", bytes.NewBufferString(data.Encode()))
+		req := httptest.NewRequest("POST", "/signin", bytes.NewBufferString(data.Encode()))
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 
 		res := httptest.NewRecorder()

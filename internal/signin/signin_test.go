@@ -14,6 +14,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/emicklei/go-restful/v3"
+
 	"github.com/dgrijalva/jwt-go"
 
 	"github.com/dfkdream/GoSSO/internal/auth"
@@ -32,7 +34,7 @@ func createTempDS() *auth.DataStore {
 	return d
 }
 
-func TestHandler_ServeHTTP(t *testing.T) {
+func TestSignIn_WebService(t *testing.T) {
 	pk, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
 		t.Fatal(err)
@@ -40,7 +42,8 @@ func TestHandler_ServeHTTP(t *testing.T) {
 
 	ds := createTempDS()
 
-	h := New(ds, pk, time.Hour)
+	h := restful.NewContainer()
+	h.Add(New(ds, pk, time.Hour).WebService())
 
 	// Scenario 01 : Initialize User
 	{
@@ -48,7 +51,7 @@ func TestHandler_ServeHTTP(t *testing.T) {
 		data.Set("username", "hello")
 		data.Add("password", "world")
 
-		req := httptest.NewRequest("POST", "/", bytes.NewBufferString(data.Encode()))
+		req := httptest.NewRequest("POST", "/signin", bytes.NewBufferString(data.Encode()))
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 
 		res := httptest.NewRecorder()
@@ -79,7 +82,7 @@ func TestHandler_ServeHTTP(t *testing.T) {
 		data.Set("username", "halo")
 		data.Add("password", "world")
 
-		req := httptest.NewRequest("POST", "/", bytes.NewBufferString(data.Encode()))
+		req := httptest.NewRequest("POST", "/signin", bytes.NewBufferString(data.Encode()))
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 
 		res := httptest.NewRecorder()
@@ -97,7 +100,7 @@ func TestHandler_ServeHTTP(t *testing.T) {
 		data.Set("username", "hello")
 		data.Add("password", "world")
 
-		req := httptest.NewRequest("POST", "/", bytes.NewBufferString(data.Encode()))
+		req := httptest.NewRequest("POST", "/signin", bytes.NewBufferString(data.Encode()))
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 
 		res := httptest.NewRecorder()
