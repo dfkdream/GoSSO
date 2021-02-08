@@ -217,6 +217,23 @@ func TestDataStore_DeleteUser(t *testing.T) {
 	if err != storm.ErrNotFound {
 		t.Error(err)
 	}
+
+	err = ds.AddUser(u1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	err = ds.DeleteUser(&User{
+		ID: u1.ID,
+	})
+	if err != nil {
+		t.Error(err)
+	}
+
+	_, err = ds.GetUserByID(u1.ID)
+	if err != storm.ErrNotFound {
+		t.Error(err)
+	}
 }
 
 func TestDataStore_Size(t *testing.T) {
@@ -257,5 +274,43 @@ func TestDataStore_Size(t *testing.T) {
 
 	if s := ds.Size(); s != 2 {
 		t.Errorf("Expected Size()==2 but got %d", s)
+	}
+}
+
+func TestDataStore_GetAllUsers(t *testing.T) {
+	ds := createTempDS()
+
+	p, err := permission.FromString("+:sso")
+	if err != nil {
+		t.Error(err)
+	}
+
+	u1 := &User{
+		ID:          uuid.New(),
+		Username:    "hello",
+		Password:    mustHashPassword("world"),
+		Permissions: []permission.Permission{p},
+	}
+
+	err = ds.AddUser(u1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	u1.ID = uuid.New()
+	u1.Username = "hola"
+
+	err = ds.AddUser(u1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	all, err := ds.GetAllUsers()
+	if err != nil {
+		t.Error(err)
+	}
+
+	if len(all) != 2 {
+		t.Errorf("Expeted len(all)==2 but got %d", len(all))
 	}
 }

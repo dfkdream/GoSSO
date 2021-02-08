@@ -65,3 +65,12 @@ func (d DataStore) GetUserByUsername(username string) (*User, error) {
 	}
 	return user, nil
 }
+
+func (d DataStore) GetAllUsers() ([]User, error) {
+	uList := make([]User, 0)
+	err := d.db.All(&uList)
+	if err != nil {
+		return nil, err
+	}
+	return uList, nil
+}
